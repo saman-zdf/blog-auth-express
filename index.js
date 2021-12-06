@@ -24,6 +24,9 @@ app.use('/api/v1/users', userRouter);
 const postRouter = require('./routes/posts');
 app.use('/api/v1/posts', postRouter);
 
+// import category router
+const categoryRouter = require('./routes/categories');
+app.use('/api/v1/categories', categoryRouter);
 app.listen(5000, () => {
   console.log('server is on port 5000');
 });
