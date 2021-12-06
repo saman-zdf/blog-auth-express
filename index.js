@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose');
+const multer = require('multer');
 
 // middleware
 app.use(express.json());
@@ -11,6 +12,20 @@ mongoose
   .connect(process.env.DATABASE_URI)
   .then(() => console.log('connected to mongo'))
   .catch((err) => console.log(err));
+
+// image storage
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'images');
+  },
+  filename: (req, file, cb) => {
+    cb(null, 'test.jpeg');
+  },
+});
+const upload = multer({ storage: storage });
+app.post('/api/v1/upload', upload.single('file'), (req, res) => {
+  res.status(200).json('File has been uploaded');
+});
 
 // import auth router
 const authRouter = require('./routes/auth');
