@@ -14,7 +14,11 @@ mongoose
 
 // import auth router
 const authRouter = require('./routes/auth');
-app.use('/api/v1', authRouter);
+app.use('/api/v1/auth', authRouter);
+
+// import user router
+const userRouter = require('./routes/users');
+app.use('/api/v1/users', userRouter);
 
 app.listen(5000, () => {
   console.log('server is on port 5000');
