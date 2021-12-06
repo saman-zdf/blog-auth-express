@@ -20,6 +20,10 @@ app.use('/api/v1/auth', authRouter);
 const userRouter = require('./routes/users');
 app.use('/api/v1/users', userRouter);
 
+// import post router
+const postRouter = require('./routes/posts');
+app.use('/api/v1/posts', postRouter);
+
 app.listen(5000, () => {
   console.log('server is on port 5000');
 });
