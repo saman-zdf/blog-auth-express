@@ -3,9 +3,19 @@ const app = express();
 require('dotenv').config();
 const mongoose = require('mongoose');
 const multer = require('multer');
+const cors = require('cors');
+const path = require('path');
+const corsOptions = {
+  origin: '*',
+  credentials: true,
+  optionSuccesStatue: 200,
+};
+
+app.use(cors(corsOptions));
 
 // middleware
 app.use(express.json());
+app.use('/images', express.static(path.join(__dirname, '/images')));
 
 // connecting mongoDB
 mongoose
@@ -19,7 +29,7 @@ const storage = multer.diskStorage({
     cb(null, 'images');
   },
   filename: (req, file, cb) => {
-    cb(null, 'test.jpeg');
+    cb(null);
   },
 });
 const upload = multer({ storage: storage });
